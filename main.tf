@@ -213,10 +213,10 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs_task_execution_cloudwatch_access" {
-  role       = local.ecs_task_execution_role_name
-  policy_arn = aws_iam_policy.task_execution_logging_policy.arn
-}
+//resource "aws_iam_role_policy_attachment" "ecs_task_execution_cloudwatch_access" {
+//  role       = local.ecs_task_execution_role_name
+//  policy_arn = aws_iam_policy.task_execution_logging_policy.arn
+//}
 
 // Cloudwatch execution role
 data "aws_iam_policy_document" "cloudwatch_assume_role" {
