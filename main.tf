@@ -31,7 +31,7 @@ locals {
   container_definitions = [
     merge({
       "name" : var.task_name,
-      "image" : "${data.aws_ecr_repository.existing.repository_url}:${var.image_tag}",
+      "image" : "${data.aws_ecr_repository.existing.name}:${var.image_tag}",
       "cpu" : var.task_cpu / 1024,
       "memoryReservation" : var.task_memory,
       "essential" : true,
