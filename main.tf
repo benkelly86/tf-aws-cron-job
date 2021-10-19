@@ -23,15 +23,15 @@ locals {
 // We use a terraform map object and serialize to Json to allow end-users to pass their custom task definition
 // parameters as a variable to the module.  We only specify the minimum values needed to run the task and configure
 // Cloudwatch logging
-data "aws_ecr_repository" "existing" {
-  name = var.ecr_repo_name
-}
+//data "aws_ecr_repository" "existing" {
+//  name = var.ecr_repo_name
+//}
 
 locals {
   container_definitions = [
     merge({
       "name" : var.task_name,
-      "image" : "${data.aws_ecr_repository.existing.name}:${var.image_tag}",
+      "image" : "${var.ecr_repo_name}:${var.image_tag}",
       "cpu" : var.task_cpu / 1024,
       "memoryReservation" : var.task_memory,
       "essential" : true,
