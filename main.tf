@@ -41,7 +41,7 @@ locals {
           "awslogs-region" : data.aws_region.current.name,
           "awslogs-group" : var.task_name,
           "awslogs-stream-prefix" : var.task_name,
-        //  "awslogs-create-group" : "false"
+        //  "awslogs-create-group" : "true"
         }
       }
     }, var.extra_container_defs)
