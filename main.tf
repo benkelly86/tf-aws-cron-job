@@ -11,7 +11,7 @@ resource "aws_ecs_cluster" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "task_log_group" {
-  name = "sr-${var.task_name}"
+  name = var.task_name
 }
 
 data "aws_ecs_cluster" "existing" {
