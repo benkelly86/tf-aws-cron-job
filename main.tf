@@ -9,6 +9,16 @@ resource "aws_ecs_cluster" "this" {
   count = var.ecs_cluster_name == "" ? 1 : 0
   name  = var.task_name
 }
+
+resource "aws_cloudwatch_log_group" "task_log_group" {
+  name = "scheduled_reports-${var.client}"
+
+  tags = {
+    Environment = var.environment
+    Client = var.client
+  }
+}
+
 data "aws_ecs_cluster" "existing" {
   count        = var.ecs_cluster_name != "" ? 1 : 0
   cluster_name = var.ecs_cluster_name
@@ -39,7 +49,7 @@ locals {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-region" : data.aws_region.current.name,
-          "awslogs-group" : var.task_name,
+          "awslogs-group" : aws_cloudwatch_log_group.task_log_group.name,
           "awslogs-stream-prefix" : var.task_name,
         //  "awslogs-create-group" : "true"
         }
